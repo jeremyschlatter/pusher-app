@@ -9,7 +9,7 @@
         <script>connect("room{{ room.id }}", "{{ room.id }}");</script>
     </head>
     <body>
-        This is the super sweet room {{ room.id }}.
+        Welcome to chat room {{ room.id }}!
         <ul id="chat-lines">
         {% for line in lines %}
             <li>{{ line.text }}</li>
