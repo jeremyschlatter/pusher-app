@@ -10,7 +10,7 @@ def index(request):
 
 def room(request, room_id):
     room = get_object_or_404(Room, pk=room_id)
-    return render(request, 'rooms/get.html', {'room': room})
+    return render(request, 'rooms/get.html', {'room': room, 'lines': room.line_set.order_by('timestamp')})
 
 def submit(request, room_id):
     room = get_object_or_404(Room, pk=room_id)

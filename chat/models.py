@@ -8,6 +8,7 @@ class Room(models.Model):
 class Line(models.Model):
     room = models.ForeignKey(Room)
     text = models.CharField(max_length=500)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.text

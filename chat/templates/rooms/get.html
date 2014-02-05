@@ -6,7 +6,7 @@
     <body>
         <ul>
         This is the super sweet room {{ room.id }}.
-        {% for line in room.line_set.all %}
+        {% for line in lines %}
             <li>{{ line.text }}</li>
         {% endfor %}
         </ul>
