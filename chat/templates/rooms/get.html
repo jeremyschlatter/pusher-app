@@ -4,19 +4,20 @@
         <meta charset="utf-8" />
         <script src="//js.pusher.com/2.1/pusher.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="/static/js/jquery.cookie.js"></script>
         <script src="/static/js/chat-room.js"></script>
         <script>connect("room{{ room.id }}");</script>
     </head>
     <body>
-        <ul id="chat-lines">
         This is the super sweet room {{ room.id }}.
+        <ul id="chat-lines">
         {% for line in lines %}
             <li>{{ line.text }}</li>
         {% endfor %}
         </ul>
-        <form action="{% url 'chat:submit' room.id %}" method="post">
+        <form action="javascript:doSubmit('{% url 'chat:submit' room.id %}');">
             {% csrf_token %}
-            <input type="text" name="text" />
+            <input autocomplete="off" id="new-line" type="text" name="text" />
         </form>
     </body>
 </html>
