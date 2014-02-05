@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'realtime.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^chat/', include('chat.urls')),
-    url(r'^$', include('chat.urls')),
+    url(r'^chat/', include('chat.urls', namespace='chat')),
+    url(r'^$', include('chat.urls', namespace='chat')),
     url(r'^admin/', include(admin.site.urls)),
 )
