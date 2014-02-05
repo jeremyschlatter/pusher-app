@@ -6,7 +6,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <script src="/static/js/jquery.cookie.js"></script>
         <script src="/static/js/chat-room.js"></script>
-        <script>connect("room{{ room.id }}");</script>
+        <script>connect("room{{ room.id }}", "{{ room.id }}");</script>
     </head>
     <body>
         This is the super sweet room {{ room.id }}.

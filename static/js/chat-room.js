@@ -20,9 +20,16 @@ Pusher.log = function(message) {
 };
 
 var channel;
-function connect(name) {
-    var pusher = new Pusher('0e0c5944e77aaa1238f8', {'encrypted': true});
-    channel = pusher.subscribe(name);
+function connect(name, room_id) {
+    var pusher = new Pusher('0e0c5944e77aaa1238f8', {
+        encrypted: true,
+        authEndpoint: '/chat/pusher_auth',
+        auth: {
+            params: {'room_id': room_id, 'password': $.cookie('room' + room_id + '-pass')},
+            headers: {'X-CSRFToken': csrftoken}
+        }
+    });
+    channel = pusher.subscribe('private-' + name);
     channel.bind('new_message', function(data) {
         $('#chat-lines').append('<li>' + data.message + '</li>');
     });
