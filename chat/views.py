@@ -15,9 +15,21 @@ p = pusher.Pusher(
 def index(request):
     return HttpResponse("Hello, Jeremy")
 
+def enter_password(request, room_id, flash=False):
+    return render(request, 'rooms/enter_pass.html', {'room_id': room_id, 'flash': flash})
+
 def room(request, room_id):
     room = get_object_or_404(Room, pk=room_id)
-    return render(request, 'rooms/get.html', {'room': room, 'lines': room.line_set.order_by('timestamp')})
+    try:
+        password = request.COOKIES['room' + room_id + '-pass']
+    except KeyError:
+        return enter_password(request, room_id)
+    if password != room.password:
+        response = enter_password(request, room_id, flash=True)
+        response.delete_cookie('room' + room_id + '-pass', path=request.path.rstrip('/'))
+        return response
+    response = render(request, 'rooms/get.html', {'room': room, 'lines': room.line_set.order_by('timestamp')})
+    return response
 
 def submit(request, room_id):
     room = get_object_or_404(Room, pk=room_id)

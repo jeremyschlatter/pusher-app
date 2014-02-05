@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Room(models.Model):
+    password = models.CharField(max_length=200)
     def __unicode__(self):
         return "Room %d" % self.id
 
